@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Console Tricks!</title>
+</head>
+<body>
+
+  <p onClick="makeGreen()">×BREAK×DOWN×</p>
+
+  <script>
+    const dogs = [{ name: 'Snickers', age: 2 }, { name: 'hugo', age: 8 }];
+
+    function makeGreen() {
+      const p = document.querySelector('p');
+      p.style.color = '#BADA55';
+      p.style.fontSize = '50px';
+    }
+
+    // Regular
+    console.log('hello');
+
+    // Interpolated
+    console.log('Hello I am a %s string','test');
+    //in es6 we can also use: console.log(`Hello I am a ${var}`);
+
+    // Styled
+    console.log('%c I am some great text','font-size:20px; background:red;'); //can style the element by putting %c in front of it
+
+    // warning!
+    console.warn('OH NOOO');
+
+    // Error :|
+    console.error('shit!');
+
+    // Info
+    console.info('fun fact');
+
+    // Testing
+    const p=document.querySelector('p');
+    console.assert(p.classList.contains('ouch'),'You did not select the right element'); // it will be fired only when the condition is false;
+
+    // clearing
+    //console.clear();
+
+    // Viewing DOM Elements
+    console.log(p);
+    console.dir(p);
+
+    // Grouping together //groups the console statements together
+    dogs.forEach(dog => {
+      console.group(`${dog.name}`); //also groupCollapsed
+      console.log(`this is ${dog.name}`);
+      console.log(`${dog.name} is ${dog.age} years old`);
+      console.groupEnd(`${dog.name}`);
+    });
+
+    // counting
+    console.count('wes'); //1
+    console.count('wes'); //2
+    console.count('steave'); //1
+    console.count('wes'); //3
+    console.count('steave'); //2
+
+    // timing
+    console.time('fetching data');
+    fetch('http://api.github.com/users/wesbos')
+    .then((data) => {data.json()})
+    .then((data) => {
+      console.timeEnd('fetching data'); // same string as .time
+      console.log(data);
+    });
+
+    console.table(dogs);
+  </script>
+</body>
+</html>
